@@ -27,8 +27,6 @@ class BasicRatingSpider(Spider):
     default_headers = {
         'User-Agent': 'WOWS Rating Scanner',
         'X-Requested-With': 'XMLHttpRequest',
-
-
     }
 
     def _generate_jobs(self):

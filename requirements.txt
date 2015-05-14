@@ -3,4 +3,3 @@ pymongo
 requests
 lxml
 httplib2
-progressbar
