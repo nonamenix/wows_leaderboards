@@ -1,0 +1,59 @@
+<!-- simple-todos.html -->
+<head>
+    <title>Basic rating</title>
+</head>
+
+<body>
+    {{> leaderboard}}
+</body>
+
+<template name="leaderboard">
+    <div class="row">
+        <div class="small-12 column">
+            <header>
+                <h1>Basic raiting {{getPublishedCount 'ratingSize'}}</h1>
+            </header>
+            <p>
+                Show users with more than 500 battles
+            </p>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Battles</th>
+                    <th>Victories</th>
+                    <th>Experience</th>
+                    <th>Victory percent</th>
+                    <th>Realm</th>
+                    <th>Profile</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {{#each ratings}}
+                    {{> rating}}
+                {{/each}}
+
+                </tbody>
+            </table>
+
+            <ul class="pagination" role="menubar" aria-label="Pagination">
+                <li><a href="#prev" id="prev-page">&laquo; Previous page</a></li>
+                <li class="right"><a href="#next" id="next-page">Next page &raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+</template>
+
+<template name="rating">
+    <tr>
+        <td>{{user}}</td>
+        <td>{{battles}}</td>
+        <td>{{victories}}</td>
+        <td>{{experience}}</td>
+        <td>{{prettyPercent vpb}}</td>
+        <td>{{prettyRealm realm}}</td>
+        <td><a target="_blank" href="http://worldofwarships.{{realm}}/cbt/accounts/{{spa_id}}-">go</a></td>
+    </tr>
+</template>

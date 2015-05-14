@@ -1,0 +1,1 @@
+BasicRatings = new Meteor.Collection("leaderboard");
