@@ -71,6 +71,7 @@ class BasicRatingSpider(Spider):
             children = row.getchildren()
             spa_id = row.attrib.values()[0]
             characteristics = [child.text or child.getchildren()[0].text for child in children]
+
             user = {
                 'user': characteristics[1],
                 'battles': int(characteristics[2]),
@@ -80,9 +81,13 @@ class BasicRatingSpider(Spider):
                 'updated_at': datetime.utcnow(),
                 'realm': self.realm
             }
+
             user['vpb'] = round(float(user['victories']) / user['battles'] if user['battles'] else 0, 4) * 100
 
-            self.leaderboard.insert_one(user)
+            self.leaderboard.update({spa_id: spa_id}, {
+                '$push': {'history': user},
+                '$set': user
+            }, upsert=True)
 
     def _add_extra_pages(self, job, page_info):
         """
