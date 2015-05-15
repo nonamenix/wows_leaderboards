@@ -4,7 +4,7 @@
 </head>
 
 <body>
-    {{> leaderboard}}
+{{> leaderboard}}
 </body>
 
 <template name="leaderboard">
@@ -14,9 +14,20 @@
                 <h1>Basic raiting {{getPublishedCount 'ratingSize'}}</h1>
             </header>
             <p>
-                Show users with more than 500 battles
+                Show users with more than 700 battles
             </p>
 
+            <div class="row">
+                <div class="large-2 column">
+                    {{> realmFilter}}
+                </div>
+                <div class="large-2 column">
+                    {{> sort}}
+                </div>
+                <div class="large-6 column">
+
+                </div>
+            </div>
             <table style="width: 100%">
                 <thead>
                 <tr>
@@ -32,7 +43,7 @@
                 <tbody>
 
                 {{#each ratings}}
-                    {{> rating}}
+                {{> rating}}
                 {{/each}}
 
                 </tbody>
@@ -45,6 +56,26 @@
         </div>
     </div>
 </template>
+
+<template name="realmFilter">
+    <select id="realm">
+        <option value="all">All</option>
+        <option value="ru">Russia</option>
+        <option value="com">America</option>
+        <option value="eu">Europe</option>
+        <option value="sg">Asia</option>
+    </select>
+</template>
+
+<template name="sort">
+    <select id="sort">
+        <option value="vpb">Victory percent</option>
+        <option value="battles">Battles</option>
+        <option value="victories">Victories</option>
+        <option value="experience">Experience</option>
+    </select>
+</template>
+
 
 <template name="rating">
     <tr>
