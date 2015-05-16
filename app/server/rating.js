@@ -1,9 +1,15 @@
-Meteor.publish("rating", function (page, sortField, realm) {
+Meteor.publish("rating", function (page, sortField, realm, username) {
     var page_size = 20;
-    var filter = {};
+    var filter = {battles: {$gt: 500}};
+
     if (realm != 'all' && realm !== undefined) {
         filter.realm = realm;
     }
+
+    if (username !== null) {
+        filter.user = {$regex: username + ".*", $options: 'i'};
+    }
+
     var extra = {
         sort: {},
         limit: page_size,

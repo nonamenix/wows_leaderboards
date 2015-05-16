@@ -84,10 +84,11 @@ class BasicRatingSpider(Spider):
 
             user['vpb'] = round(float(user['victories']) / user['battles'] if user['battles'] else 0, 4) * 100
 
-            self.leaderboard.update({spa_id: spa_id}, {
-                '$push': {'history': user},
-                '$set': user
-            }, upsert=True)
+            self.leaderboard.insert_one(user)
+            # self.leaderboard.update({spa_id: spa_id}, {
+            #     '$push': {'history': user},
+            #     '$set': user
+            # }, upsert=True)
 
     def _add_extra_pages(self, job, page_info):
         """

@@ -1,10 +1,16 @@
 Session.setDefault('ratingPage', 0);
 Session.setDefault('sortField', 'vpb');
-Session.setDefault('realmFilter', 'all')
+Session.setDefault('realmFilter', 'all');
+Session.setDefault('username', null);
 
 
 Meteor.autorun(function () {
-    Meteor.subscribe('rating', Session.get('ratingPage'), Session.get('sortField'), Session.get('realmFilter'));
+    Meteor.subscribe('rating',
+        Session.get('ratingPage'),
+        Session.get('sortField'),
+        Session.get('realmFilter'),
+        Session.get('username')
+    );
     Meteor.subscribe('ratingSize');
 });
 
@@ -17,18 +23,27 @@ Template.leaderboard.helpers({
 
 
 Template.sort.events({
-        'change #sort': function (e, t) {
-            Session.set('sortField', e.target.value);
-        }
+    'change #sort': function (e, t) {
+        Session.set('sortField', e.target.value);
     }
-);
+});
 
 Template.realmFilter.events({
-        'change #realm': function (e, t) {
-            Session.set('realmFilter', e.target.value);
+    'change #realm': function (e, t) {
+        Session.set('realmFilter', e.target.value);
+    }
+});
+
+Template.username.events({
+    'keyup #username': function (e, t) {
+        var username = e.target.value;
+        if (username.length > 2) {
+            Session.set('username', username);
+        } else {
+            Session.set('username', null);
         }
     }
-);
+});
 
 
 Template.rating.helpers({

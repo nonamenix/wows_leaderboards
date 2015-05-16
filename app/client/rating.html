@@ -14,7 +14,7 @@
                 <h1>Basic raiting {{getPublishedCount 'ratingSize'}}</h1>
             </header>
             <p>
-                Show users with more than 700 battles
+                Show users with more than 500 battles
             </p>
 
             <div class="row">
@@ -25,7 +25,7 @@
                     {{> sort}}
                 </div>
                 <div class="large-6 column">
-
+                    {{> username}}
                 </div>
             </div>
             <table style="width: 100%">
@@ -57,6 +57,10 @@
     </div>
 </template>
 
+<template name="searchPlayer">
+
+</template>
+
 <template name="realmFilter">
     <select id="realm">
         <option value="all">All</option>
@@ -77,6 +81,9 @@
 </template>
 
 
+<template name="username">
+    <input id="username" placeholder="Username" type="text"/>
+</template>
 <template name="rating">
     <tr>
         <td>{{user}}</td>
